@@ -1,0 +1,62 @@
+import random
+
+hp = random.randint(100, 150)
+dmg = random.randint(40, 50)
+zombiehp = random.randint(20, 30)
+zombiedmg = random.randint(10, 20)
+kills = 0
+requiredkills = random.randint(3, 5)
+numberofpotions = 2
+dodge = random.randint(1, 3)
+
+print("You are in a scary dungeon.  There is a zombie in front of you!  You can")
+
+while hp > 0:
+    print("You have %s health, and %s potions.  The zombie has %s health." % (hp, numberofpotions, zombiehp))
+    print('''1) Attack it!''')
+    print("-----or-----")
+    print('''2) Drink a health potion.''')
+    print("-----or-----")
+    print('''3) Attempt to dodge.''')
+
+    choice = input("> ")
+
+    if choice == 1:
+        print("You attack the zombie for %s damage!  It hits you for %s damage!" % (dmg, zombiedmg))
+        zombiehp = zombiehp - dmg
+        hp = hp - zombiedmg
+        
+    elif choice == 2 and numberofpotions > 0:
+        print("You drink a potion and regain 100 health!  The zombie attacks you for %s damage!" % (zombiedmg))
+        hp = hp + 100 - zombiedmg
+        numberofpotions = numberofpotions - 1
+        
+    elif choice == 3:
+        
+        if dodge != 3:
+            print("You dodged the zombie's attack, and found a potion!")
+            numberofpotions = numberofpotions + 1
+        
+        else:
+            print("You tripped and the zombie got you really good!")
+            hp = hp - zombiedmg * 1.5
+    
+    else:
+        print("You can only say 1 or 2.")
+        
+    if zombiehp <= 0:
+        kills = kills + 1
+        
+        if kills == requiredkills:
+            print("You killed all the zombies and escaped!")
+            break
+        
+        else:
+            print("Another zombie appears out of the darkness!")
+            zombiehp = random.randint(20, 30)
+            zombiedmg = random.randint(10, 20)
+    
+while True:
+    if hp < 1:
+        print("----- You Died -----")
+        break
