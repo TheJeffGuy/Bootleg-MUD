@@ -4,7 +4,7 @@
 import random
 
 hp = random.randint(100, 150)
-dmg = random.randint(40, 50)
+dmg = random.randint(10, 20)
 zombiehp = random.randint(20, 30)
 zombiedmg = random.randint(10, 20)
 kills = 0
@@ -58,10 +58,11 @@ while hp > 0:
             break
         
         else:
+            enemytype = random.choice(enemy)
             print("A %s appears out of the darkness!" % (enemytype))
             zombiehp = random.randint(20, 30)
             zombiedmg = random.randint(10, 20)
-            enemytype = random.choice(enemy)
+            
     
 while True:
     if hp < 1:
