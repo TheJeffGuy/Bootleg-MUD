@@ -1,3 +1,6 @@
+# !#usr/bin/python3
+# This is a python3 program.  It won't work in python2
+
 import random
 
 hp = random.randint(100, 150)
@@ -8,8 +11,10 @@ kills = 0
 requiredkills = random.randint(3, 5)
 numberofpotions = 2
 dodge = random.randint(1, 3)
+enemy = ['Thief', 'Zombie', 'Orc', 'Dog']
+enemytype = random.choice(enemy)
 
-print("You are in a scary dungeon.  There is a zombie in front of you!  You can")
+print("You are in a scary dungeon.  There is a %s in front of you!  You can" % (enemytype))
 
 while hp > 0:
     print('''1) Attack it!''')
@@ -17,44 +22,46 @@ while hp > 0:
     print('''2) Drink a health potion.''')
     print("-----or-----")
     print('''3) Attempt to dodge.''')
-    print("You have %s health, and %s potions.  The zombie has %s health." % (hp, numberofpotions, zombiehp))
+    print("You have %s health, and %s potions.  The enemy has %s health." % (hp, numberofpotions, zombiehp))
 
     choice = input("> ")
 
     if choice == "1":
-        print("You attack the zombie for %s damage!  It hits you for %s damage!" % (dmg, zombiedmg))
+        print("You attack the %s for %s damage!  It hits you for %s damage!" % (enemytype, dmg, zombiedmg))
         zombiehp = zombiehp - dmg
         hp = hp - zombiedmg
         
     elif choice == "2" and numberofpotions > 0:
-        print("You drink a potion and regain 100 health!  The zombie attacks you for %s damage!" % (zombiedmg))
+        print("You drink a potion and regain 100 health!  The %s attacks you for %s damage!" % (enemytype, zombiedmg))
         hp = hp + 100 - zombiedmg
         numberofpotions = numberofpotions - 1
         
     elif choice == "3":
         
         if dodge != 3:
-            print("You dodged the zombie's attack, and found a potion!")
+            print('''You dodged the %s's attack, and found a potion!''' % (enemytype))
             numberofpotions = numberofpotions + 1
         
         else:
-            print("You tripped and the zombie got you really good!")
+            print("You tripped and the %s got you really good!" % (enemytype))
             hp = hp - zombiedmg * 1.5
     
     else:
         print("You can only say 1 or 2.")
         
     if zombiehp <= 0:
+        print("----- You Killed the %s! -----" % (enemytype))
         kills = kills + 1
         
         if kills == requiredkills:
-            print("You killed all the zombies and escaped!")
+            print("You killed all the enemies and escaped!")
             break
         
         else:
-            print("Another zombie appears out of the darkness!")
+            print("A %s appears out of the darkness!" % (enemytype))
             zombiehp = random.randint(20, 30)
             zombiedmg = random.randint(10, 20)
+            enemytype = random.choice(enemy)
     
 while True:
     if hp < 1:
