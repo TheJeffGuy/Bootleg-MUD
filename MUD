@@ -1,8 +1,8 @@
 # !#usr/bin/python3
-# This is a python3 program.  It won't work in python2
 
 import random
 
+#variables
 hp = random.randint(100, 150)
 dmg = random.randint(10, 20)
 zombiehp = random.randint(20, 30)
@@ -16,6 +16,7 @@ enemytype = random.choice(enemy)
 
 print("You are in a scary dungeon.  There is a %s in front of you!  You can" % (enemytype))
 
+#game
 while hp > 0:
     print('''1) Attack it!''')
     print("-----or-----")
@@ -26,17 +27,21 @@ while hp > 0:
 
     choice = input("> ")
 
-    if choice == "1":
+    #action
+    if choice == "1" or choice == 1:
         print("You attack the %s for %s damage!  It hits you for %s damage!" % (enemytype, dmg, zombiedmg))
         zombiehp = zombiehp - dmg
         hp = hp - zombiedmg
         
-    elif choice == "2" and numberofpotions > 0:
-        print("You drink a potion and regain 100 health!  The %s attacks you for %s damage!" % (enemytype, zombiedmg))
-        hp = hp + 100 - zombiedmg
-        numberofpotions = numberofpotions - 1
+    elif choice == "2" or choice == 2:
+        if numberofpotions > 0:
+            print("You drink a potion and regain 100 health!  The %s attacks you for %s damage!" % (enemytype, zombiedmg))
+            hp = hp + 100 - zombiedmg
+            numberofpotions = numberofpotions - 1
+        else:
+            print("You don't have enough potions.")
         
-    elif choice == "3":
+    elif choice == "3" or choice == 3:
         
         if dodge != 3:
             print('''You dodged the %s's attack, and found a potion!''' % (enemytype))
@@ -48,7 +53,8 @@ while hp > 0:
     
     else:
         print("You can only say 1 or 2.")
-        
+    
+    #is it dead    
     if zombiehp <= 0:
         print("----- You Killed the %s! -----" % (enemytype))
         kills = kills + 1
@@ -63,7 +69,7 @@ while hp > 0:
             zombiehp = random.randint(20, 30)
             zombiedmg = random.randint(10, 20)
             
-    
+#are you dead    
 while True:
     if hp < 1:
         print("----- You Died -----")
