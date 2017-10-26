@@ -26,15 +26,15 @@ while hp > 0:
     print('''3) Attempt to dodge.''')
     print("You have %s health, and %s potions.  The enemy has %s health." % (hp, numberofpotions, zombiehp))
 
-    choice = input("> ")
+    choice = int(input("> "))
 
     #action
-    if choice == "1" or choice == 1:
+    if choice == 1:
         print("You attack the %s for %s damage!  It hits you for %s damage!" % (enemytype, dmg, zombiedmg))
         zombiehp = zombiehp - dmg
         hp = hp - zombiedmg
         
-    elif choice == "2" or choice == 2:
+    elif choice == 2:
         if numberofpotions > 0:
             print("You drink a potion and regain 100 health!  The %s attacks you for %s damage!" % (enemytype, zombiedmg))
             hp = hp + 100 - zombiedmg
@@ -42,7 +42,7 @@ while hp > 0:
         else:
             print("You don't have enough potions.")
         
-    elif choice == "3" or choice == 3:
+    elif choice == 3:
         
         if dodge != 3:
             print('''You dodged the %s's attack, and found a potion!''' % (enemytype))
